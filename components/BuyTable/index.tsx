@@ -1,82 +1,44 @@
-import React from 'react';
+import { Typography } from "@mui/material";
+import { useId } from "react";
 
-import { Container, Header, OrderList, OrderListPrice,  OrderListAmount, OrderListTotal } from './styles';
+import {
+  Container,
+  Header,
+  OrderList,
+  OrderListPrice,
+  OrderListAmount,
+  OrderListTotal,
+} from "./styles";
 
-const BuyTable: React.FC = () => {
+interface IBuyTableData {
+  amount: string;
+  price: string;
+  total: string;
+}
+interface IBuyTable {
+  data?: IBuyTableData[];
+}
+
+const BuyTable: React.FC<IBuyTable> = ({ data }) => {
+  const orderListKeyId = useId();
   return (
     <Container>
       <Header>
-        <div>Price(USDT)</div>
-        <div>Amount(BTC)</div>
-        <div>Total</div>
+        <Typography component="div">Price(USDT)</Typography>
+        <Typography component="div">Amount(BTC)</Typography>
+        <Typography component="div">Total</Typography>
       </Header>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-      <OrderList>
-        <OrderListPrice>19274.79</OrderListPrice>
-        <OrderListAmount>0.00498</OrderListAmount>
-        <OrderListTotal>176.92844</OrderListTotal>
-      </OrderList>
-  </Container>
-  )
-}
+      {data?.map(({ amount, price, total }, index) => (
+        <OrderList
+          key={`${orderListKeyId}-${price}-${Math.random() + index * 100}`}
+        >
+          <OrderListPrice>{price}</OrderListPrice>
+          <OrderListAmount>{amount}</OrderListAmount>
+          <OrderListTotal>{total}</OrderListTotal>
+        </OrderList>
+      ))}
+    </Container>
+  );
+};
 
 export default BuyTable;
